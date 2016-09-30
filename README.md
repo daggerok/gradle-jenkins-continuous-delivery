@@ -5,7 +5,7 @@ gradle-jenkins-continuous-delivery
 git clone ...
 ```
 
-using gradle
+using gradle wrapper
 
 ```sh
 ./gradlew projects
