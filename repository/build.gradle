@@ -34,3 +34,15 @@ task integrationTest(type: Test) {
     classpath = sourceSets.integrationTest.runtimeClasspath
     //testResultsDir = file("$testResultsDir/it")
 }
+
+integrationTest.shouldRunAfter unitTest
+
+// code coverage
+
+apply plugin: 'jacoco'
+
+task jacocoIntegrationTestReposrt(type: JacocoReport) {
+    // sourceSets.main - it's a production code
+    sourceSets sourceSets.main
+    executionData integrationTest
+}

@@ -8,9 +8,7 @@ task buildSchema << {
     println 'db schema is created.'
 }
 
-task runDatabase(dependsOn: ['startDatabase', 'buildSchema']) {
-    println 'run db'
-}
+task runDatabase(dependsOn: ['startDatabase', 'buildSchema'])
 
 task stopDatabase << {
     println 'stopping database...'

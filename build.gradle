@@ -7,4 +7,4 @@ apply from: "$rootDir/repository/build.gradle"
 integrationTest.dependsOn runDatabase
 integrationTest.finalizedBy stopDatabase
 
-check.dependsOn integrationTest
+build.dependsOn integrationTest

@@ -1,17 +1,30 @@
 gradle-jenkins-continuous-delivery [![build](https://travis-ci.org/daggerok/gradle-jenkins-continuous-delivery.svg?branch=master)](https://travis-ci.org/daggerok/gradle-jenkins-continuous-delivery)
 ==================================
 
-running integration tests with db
+1. `code` -> `unitTest` ->
+2. `start db` -> `build db schema` -> `integrationTest` -> `stop db` ->
+3. `verify` -> `build` -> `deploy`
 
--> `code` -> `unitTest` ->
-    -> `start db` -> `build db schema` -> `integrationTest` -> `stop db` ->
-        -> `verify` -> `build` -> `deploy`
+**code coverage**
+
+- [Cobertura](#) (offlice bytecode)
+- [EMMA](#)  (offlice bytecode)
+- [Clover](#) (source code)
+- [JACOCO](#) (on-fly bytecode, ships with gradle as a plugin)
+
+*code coverage with JaCoCo for integration tests:*
 
 ```sh
-gradle IntegrationTest
-run db
-...
-:compileIntegrationTest...
+./gradlew jacoco jacocoIntegrationTestReposrt
+```
+
+**running integration tests with db**
+
+`compile  tests`-> `start db` -> `build db schema` -> `integrationTest` -> `stop db`
+
+```sh
+./gradlew IntegrationTest
+:compile...
 ...
 :startDatabase
 starting database...
@@ -24,10 +37,9 @@ db schema is created.
 :stopDatabase
 stopping database...
 database is stopped.
-...
 ```
 
-see .travis.yml
+**how to build** [*see travis build config*](.travis.yml)
 
 ```sh
 git clone ...
@@ -35,7 +47,7 @@ git clone ...
 ./gradlew integrationTest
 ```
 
-using gradle wrapper
+**using gradle wrapper**
 
 ```sh
 ./gradlew projects
