@@ -1,0 +1,20 @@
+task startDatabase << {
+    println 'starting database...'
+    println 'database is started.'
+}
+
+task buildSchema << {
+    println 'creating db schema...'
+    println 'db schema is created.'
+}
+
+task runDatabase(dependsOn: ['startDatabase', 'buildSchema']) {
+    println 'run db'
+}
+
+task stopDatabase << {
+    println 'stopping database...'
+    println 'database is stopped.'
+}
+
+buildSchema.shouldRunAfter startDatabase
