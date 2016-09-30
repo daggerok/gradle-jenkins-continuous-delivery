@@ -1,2 +1,36 @@
 group group
 version version
+
+apply plugin: 'java'
+
+sourceSets {
+    unitTest {
+        java.srcDir file('src/test/unit/java')
+        resources.srcDir file('src/test/unit/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+    integrationTest {
+        java.srcDir file('src/test/it/java')
+        resources.srcDir file('src/test/it/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+}
+
+task unitTest(type: Test) {
+    description = 'Runs the unit tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.unitTest.output.classesDir
+    classpath = sourceSets.unitTest.runtimeClasspath
+    //testResultsDir = file("$testResultsDir/unit")
+}
+
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    //testResultsDir = file("$testResultsDir/it")
+}
