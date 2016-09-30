@@ -1,0 +1,27 @@
+# check this solution: https://github.com/MehrCurry/docker-sonar.git
+sonarqube:
+  image: sonarqube:5.6-alpine
+  ports:
+   - "9000:9000"
+  external_links:
+   - sonar-db:db
+  environment:
+   - SONARQUBE_JDBC_URL=jdbc:mysql://db/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+   - SONARQUBE_JDBC_USERNAME=admin
+   - SONARQUBE_JDBC_PASSWORD=123456
+  volumes_from:
+   - plugins
+  restart: always
+
+plugins:
+  image: sonarqube:5.6-alpine
+  volumes:
+   - /opt/sonarqube/extensions
+   - /opt/sonarqube/lib/bundled-plugins
+  command: /bin/true
+
+install_plugins:
+  build: plugins
+  volumes_from:
+   - plugins
+  restart: never

@@ -1,0 +1,20 @@
+sonarqube {
+    properties {
+        property 'sonar.host.url', 'http://localhost:9000'
+        ////Property 'sonar.jdbc.url' is not supported any more. It will be ignored. There is no longer any DB connection to the SQ database.
+        ////Property 'sonar.jdbc.username' is not supported any more. It will be ignored. There is no longer any DB connection to the SQ database.
+        ////Property 'sonar.jdbc.password' is not supported any more. It will be ignored. There is no longer any DB connection to the SQ database.
+        //property 'sonar.jdbc.url', 'jdbc:h2:tcp://localhost:9092/sonar'
+        //property 'sonar.jdbc.username', 'sonar'
+        //property 'sonar.jdbc.password', 'sonar'
+        property 'sonar.jdbc.driverClassName', 'org.h2.Driver'
+    }
+}
+
+subprojects {
+    sonarqube {
+        properties {
+            property 'sonar.sourceEncoding', 'UTF-8'
+        }
+    }
+}

@@ -46,3 +46,25 @@ task jacocoIntegrationTestReposrt(type: JacocoReport) {
     sourceSets sourceSets.main
     executionData integrationTest
 }
+
+// static code analysis
+
+apply plugin: 'pmd'
+
+pmd {
+    ignoreFailures = true // no-no!
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+apply plugin: 'jdepend'
+
+jdepend {
+    toolVersion = '2.9.1'
+    ignoreFailures = true
+}

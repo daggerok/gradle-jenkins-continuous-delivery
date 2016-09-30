@@ -13,9 +13,13 @@ install:
 #  - sudo dpkg -i google-chrome*.deb
 language: java
 jdk: oraclejdk8
+before_script: docker run -d --name sonarqube -p 9000:9000 -p 9002:9002 sonarqube
 script:
   - ./gradlew unitTest build
   - ./gradlew integrationTest
+  - ./gradlew jacocoIntegrationTestReposrt
+  - ./gradlew sonarqube
+after_script: docker stop sonarqube
 cache.directories:
   - $HOME/.gradle/
   - $HOME/.m2/
