@@ -2,8 +2,12 @@ plugins {
     id "org.sonarqube" version "2.1"
 }
 
+allprojects {
+    apply from: "$rootDir/gradle/versioning.gradle"
+}
+
 group 'daggerok'
-version '0.0.1'
+version version
 
 apply from: "$rootDir/gradle/db.gradle"
 apply from: "$rootDir/repository/build.gradle"
@@ -14,3 +18,4 @@ integrationTest.finalizedBy stopDatabase
 build.dependsOn integrationTest
 
 apply from: "$rootDir/gradle/sonarRunner.gradle"
+

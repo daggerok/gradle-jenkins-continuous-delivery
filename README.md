@@ -5,6 +5,14 @@ gradle-jenkins-continuous-delivery [![build](https://travis-ci.org/daggerok/grad
 2. `start db` -> `build db schema` -> `integrationTest` -> `stop db` ->
 3. `verify` -> `build` -> `deploy`
 
+**versioning strategy**
+
+```bash
+# this will be exported by jenkins
+export SOURCE_BUILD_NUMBER=123 
+./gradlew assemble
+```
+
 **source code quality**
 
 *sonar*
